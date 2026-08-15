@@ -1,0 +1,629 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070a0f;
+  --foreground: #f5f7fa;
+  --surface: #0d121a;
+  --surface-hover: #121923;
+  --border: rgba(255, 255, 255, 0.08);
+  --muted: #8b95a5;
+  --primary: #7c5cff;
+  --primary-hover: #9175ff;
+  --success: #27d69b;
+  --warning: #ffb84d;
+  --danger: #ff5f6d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(124, 92, 255, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 100% 20%,
+      rgba(39, 214, 155, 0.06),
+      transparent 25%
+    ),
+    var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(124, 92, 255, 0.35);
+}
+/* =========================================================
+   TASKFLOW THEMES
+========================================================= */
+
+/* ---------------------------------------------------------
+   DARK THEME
+--------------------------------------------------------- */
+
+html[data-theme="dark"] {
+  --theme-bg: #070a0f;
+  --theme-surface: #090d13;
+  --theme-card: rgba(255, 255, 255, 0.025);
+
+  --theme-border: rgba(255, 255, 255, 0.10);
+
+  --theme-text: #ffffff;
+  --theme-muted: rgba(255, 255, 255, 0.45);
+  --theme-subtle: rgba(255, 255, 255, 0.25);
+
+  --theme-input: #0c1118;
+
+  --theme-primary: #8b5cf6;
+  --theme-primary-hover: #a78bfa;
+
+  --theme-menu: #090d13;
+}
+
+
+/* ---------------------------------------------------------
+   LIGHT THEME
+--------------------------------------------------------- */
+
+html[data-theme="light"] {
+  --theme-bg: #ffffff;
+  --theme-surface: #ffffff;
+  --theme-card: #fbfbfb;
+
+  --theme-border: #dfe3eb;
+
+  --theme-text: #000000;
+  --theme-muted: #9c9ea1;
+  --theme-subtle: #070a0e;
+
+  --theme-input: #f7f7f7;
+
+  --theme-primary: #4e44db;
+  --theme-primary-hover: #2c1dd0;
+
+  --theme-menu: #fafafa;
+}
+
+
+/* ---------------------------------------------------------
+   AURORA THEME
+--------------------------------------------------------- */
+
+html[data-theme="aurora"] {
+  --theme-bg: #030712;
+  --theme-surface: #07111f;
+
+  --theme-card: rgba(10, 25, 42, 0.72);
+
+  --theme-border: rgba(56, 189, 248, 0.18);
+
+  --theme-text: #ecfeff;
+  --theme-muted: #8aa9b9;
+  --theme-subtle: #527184;
+
+  --theme-input: #071522;
+
+  --theme-primary: #06b6d4;
+  --theme-primary-hover: #22d3ee;
+
+  --theme-menu: #071522;
+}
+
+
+/* =========================================================
+   GLOBAL THEME BACKGROUND
+========================================================= */
+
+html[data-theme="light"] body {
+  background: #f5f7fb;
+  color: #111827;
+}
+
+html[data-theme="dark"] body {
+  background: #070a0f;
+  color: white;
+}
+
+html[data-theme="aurora"] body {
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(6, 182, 212, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(139, 92, 246, 0.12),
+      transparent 30%
+    ),
+    #030712;
+
+  color: #ecfeff;
+}
+
+
+/* =========================================================
+   THEME TOGGLE BUTTON
+========================================================= */
+
+.theme-toggle-button {
+  background: var(--theme-card);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
+}
+
+.theme-toggle-button:hover {
+  background: var(--theme-border);
+}
+
+
+/* =========================================================
+   THEME MENU
+========================================================= */
+
+.theme-menu {
+  background: var(--theme-menu);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
+}
+
+.theme-menu-label {
+  color: var(--theme-subtle);
+}
+
+.theme-option {
+  color: var(--theme-text);
+}
+
+.theme-option:hover {
+  background: var(--theme-border);
+}
+
+.theme-option-description {
+  color: var(--theme-muted);
+}
+
+
+/* =========================================================
+   THEMED INPUTS
+========================================================= */
+
+.theme-input {
+  background: var(--theme-input) !important;
+  border-color: var(--theme-border) !important;
+  color: var(--theme-text) !important;
+}
+
+.theme-input::placeholder {
+  color: var(--theme-subtle) !important;
+}
+
+.theme-input:focus {
+  border-color: var(--theme-primary) !important;
+  outline: none;
+}
+
+
+/* =========================================================
+   THEMED SELECT
+========================================================= */
+
+.theme-select {
+  appearance: none;
+
+  background-color: var(--theme-input) !important;
+
+  border: 1px solid var(--theme-border) !important;
+
+  color: var(--theme-text) !important;
+
+  border-radius: 12px;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.theme-select:hover {
+  border-color: var(--theme-primary) !important;
+}
+
+.theme-select:focus {
+  border-color: var(--theme-primary) !important;
+}
+
+
+/* Dropdown options */
+
+.theme-select option {
+  background-color: var(--theme-input);
+  color: var(--theme-text);
+}
+
+
+/* LIGHT SELECT */
+
+html[data-theme="light"] .theme-select option {
+  background: #ffffff;
+  color: #111827;
+}
+
+
+/* DARK SELECT */
+
+html[data-theme="dark"] .theme-select option {
+  background: #0c1118;
+  color: #ffffff;
+}
+
+
+/* AURORA SELECT */
+
+html[data-theme="aurora"] .theme-select option {
+  background: #071522;
+  color: #ecfeff;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.theme-primary-button {
+  background: var(--theme-primary) !important;
+  color: #ffffff !important;
+
+  border: 1px solid transparent;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.theme-primary-button:hover {
+  background: var(--theme-primary-hover) !important;
+
+  transform: translateY(-1px);
+}
+
+
+/* LIGHT PRIMARY BUTTON */
+
+html[data-theme="light"] .theme-primary-button {
+  color: #ffffff !important;
+
+  box-shadow:
+    0 8px 20px rgba(79, 70, 229, 0.20);
+}
+
+
+/* AURORA PRIMARY BUTTON */
+
+html[data-theme="aurora"] .theme-primary-button {
+  box-shadow:
+    0 0 25px rgba(6, 182, 212, 0.20);
+}
+
+
+/* =========================================================
+   THEMED CARDS
+========================================================= */
+
+.theme-card {
+  background: var(--theme-card) !important;
+  border-color: var(--theme-border) !important;
+  color: var(--theme-text);
+}
+
+
+/* =========================================================
+   LIGHT MODE - MAKE COMMON DARK TAILWIND COLORS READABLE
+========================================================= */
+
+html[data-theme="light"] .bg-\[\#070a0f\] {
+  background: #ffffff !important;
+}
+
+html[data-theme="light"] .bg-\[\#090d13\] {
+  background: #ffffff !important;
+}
+
+html[data-theme="light"] .bg-\[\#0c1118\] {
+  background: #ffffff !important;
+}
+
+html[data-theme="light"] .text-white {
+  color: #111827 !important;
+}
+
+html[data-theme="light"] .text-white\/45 {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .text-white\/40 {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .text-white\/35 {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .text-white\/30 {
+  color: #94a3b8 !important;
+}
+
+html[data-theme="light"] .text-white\/25 {
+  color: #94a3b8 !important;
+}
+
+html[data-theme="light"] .border-white\/10 {
+  border-color: #dfe3eb !important;
+}
+
+html[data-theme="light"] .border-white\/5 {
+  border-color: #edf0f5 !important;
+}
+
+
+/* =========================================================
+   LIGHT MODE - SEARCH
+========================================================= */
+
+html[data-theme="light"] input {
+  color: #111827;
+}
+
+html[data-theme="light"] input::placeholder {
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   AURORA DIFFERENCE
+========================================================= */
+
+html[data-theme="aurora"] .theme-card {
+  box-shadow:
+    0 0 40px rgba(6, 182, 212, 0.04);
+}
+
+html[data-theme="aurora"] .theme-primary-button {
+  background: linear-gradient(
+    135deg,
+    #06b6d4,
+    #8b5cf6
+  ) !important;
+}
+
+
+/* =========================================================
+   SMOOTH THEME TRANSITION
+========================================================= */
+
+body,
+button,
+input,
+select,
+textarea,
+div,
+aside,
+header,
+section {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.theme-page {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  min-height: 100vh;
+}
+html[data-theme="aurora"] .theme-page {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(6, 182, 212, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(139, 92, 246, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 70% 85%,
+      rgba(16, 185, 129, 0.08),
+      transparent 25%
+    ),
+    #030712;
+}
+
+html[data-theme="aurora"] .theme-primary-button {
+  background:
+    linear-gradient(
+      135deg,
+      #06b6d4 0%,
+      #6366f1 50%,
+      #8b5cf6 100%
+    ) !important;
+
+  box-shadow:
+    0 0 25px rgba(6, 182, 212, 0.20),
+    0 0 50px rgba(139, 92, 246, 0.10);
+}
+
+html[data-theme="aurora"] .theme-toggle-button {
+  border-color: rgba(34, 211, 238, 0.25);
+  box-shadow:
+    0 0 15px rgba(6, 182, 212, 0.05);
+}
+
+html[data-theme="aurora"] .theme-menu {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 0 30px rgba(6, 182, 212, 0.06);
+}
+
+@import "tailwindcss";
+
+/* Base variables */
+:root {
+  --background: #070a0f;
+  --foreground: #f5f7fa;
+  --surface: #0d121a;
+  --surface-hover: #121923;
+  --border: rgba(255, 255, 255, 0.08);
+  --muted: #8b95a5;
+  --primary: #7c5cff;
+  --primary-hover: #9175ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   THEMES (Dark, Light, Aurora)
+========================================================= */
+html[data-theme="dark"] {
+  --theme-bg: #070a0f;
+  --theme-surface: #090d13;
+  --theme-card: rgba(255, 255, 255, 0.025);
+  --theme-border: rgba(255, 255, 255, 0.10);
+  --theme-text: #ffffff;
+  --theme-muted: rgba(255, 255, 255, 0.45);
+  --theme-subtle: rgba(255, 255, 255, 0.25);
+  --theme-input: #0c1118;
+  --theme-primary: #8b5cf6;
+  --theme-primary-hover: #a78bfa;
+}
+
+html[data-theme="light"] {
+  --theme-bg: #f5f7fb;
+  --theme-surface: #ffffff;
+  --theme-card: #ffffff;
+  --theme-border: #dfe3eb;
+  --theme-text: #111827;
+  --theme-muted: #64748b;
+  --theme-subtle: #94a3b8;
+  --theme-input: #f7f7f7;
+  --theme-primary: #4e44db;
+  --theme-primary-hover: #2c1dd0;
+}
+
+html[data-theme="aurora"] {
+  --theme-bg: #030712;
+  --theme-surface: #07111f;
+  --theme-card: rgba(10, 25, 42, 0.72);
+  --theme-border: rgba(56, 189, 248, 0.18);
+  --theme-text: #ecfeff;
+  --theme-muted: #8aa9b9;
+  --theme-subtle: #527184;
+  --theme-input: #071522;
+  --theme-primary: #06b6d4;
+  --theme-primary-hover: #22d3ee;
+}
+
+/* Theme helper classes */
+.theme-page {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  min-height: 100vh;
+}
+
+.theme-card {
+  background: var(--theme-card) !important;
+  border-color: var(--theme-border) !important;
+  color: var(--theme-text);
+}
+
+.theme-input {
+  background: var(--theme-input) !important;
+  border-color: var(--theme-border) !important;
+  color: var(--theme-text) !important;
+}
+
+.theme-primary-button {
+  background: var(--theme-primary) !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   KEYFRAME ANIMATIONS & FUTURISTIC EFFECTS
+========================================================= */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.35; filter: blur(20px); }
+  50% { opacity: 0.75; filter: blur(32px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.shimmer-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-overlay::after {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.04) 20%,
+    rgba(255, 255, 255, 0.12) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 3s infinite;
+  content: '';
+}
