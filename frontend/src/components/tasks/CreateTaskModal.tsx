@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { X, Plus, Sparkles } from 'lucide-react';
 
 import { createTask } from '@/lib/api';
@@ -27,8 +27,27 @@ export default function CreateTaskModal({
   >('todo');
 
   const [loading, setLoading] = useState(false);
-
   const [error, setError] = useState('');
+
+  // Visual animation state only.
+  const [isVisible, setIsVisible] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+
+  // Start entrance animation whenever the modal opens.
+  useEffect(() => {
+    if (isOpen) {
+      setIsClosing(false);
+
+      const timer = window.setTimeout(() => {
+        setIsVisible(true);
+      }, 10);
+
+      return () => window.clearTimeout(timer);
+    }
+
+    setIsVisible(false);
+    setIsClosing(false);
+  }, [isOpen]);
 
   if (!isOpen) {
     return null;
@@ -74,22 +93,32 @@ export default function CreateTaskModal({
   }
 
   function handleClose() {
-    if (loading) {
+    if (loading || isClosing) {
       return;
     }
 
-    setTitle('');
-    setDescription('');
-    setPriority('medium');
-    setStatus('todo');
-    setError('');
+    setIsClosing(true);
+    setIsVisible(false);
 
-    onClose();
+    window.setTimeout(() => {
+      setTitle('');
+      setDescription('');
+      setPriority('medium');
+      setStatus('todo');
+      setError('');
+      setIsClosing(false);
+
+      onClose();
+    }, 180);
   }
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+      className={`fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-md transition-all duration-200 ease-out ${
+        isVisible && !isClosing
+          ? 'bg-black/60 opacity-100'
+          : 'bg-black/0 opacity-0'
+      }`}
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           handleClose();
@@ -97,21 +126,22 @@ export default function CreateTaskModal({
       }}
     >
       <div
-        className="theme-card w-full max-w-lg overflow-hidden rounded-3xl border shadow-2xl"
+        className={`theme-card w-full max-w-lg overflow-hidden rounded-3xl border shadow-2xl transition-all duration-200 ease-out ${
+          isVisible && !isClosing
+            ? 'translate-y-0 scale-100 opacity-100'
+            : 'translate-y-2 scale-[0.97] opacity-0'
+        }`}
         onMouseDown={(event) =>
           event.stopPropagation()
         }
       >
-
         {/* =================================================
             HEADER
         ================================================= */}
 
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
-
+        <div className="flex items-center justify-between border-b border-[var(--border-color)] px-6 py-5">
           <div className="flex items-center gap-3">
-
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-500/10 text-violet-500 dark:text-violet-400 transition-all duration-200 hover:scale-105 hover:bg-violet-500/15">
               <Sparkles size={19} />
             </div>
 
@@ -124,18 +154,20 @@ export default function CreateTaskModal({
                 Add a task to your workspace
               </p>
             </div>
-
           </div>
 
           <button
             type="button"
             onClick={handleClose}
-            disabled={loading}
-            className="flex h-9 w-9 items-center justify-center rounded-xl text-white/40 transition hover:bg-white/5 hover:text-white disabled:cursor-not-allowed"
+            disabled={loading || isClosing}
+            className="group flex h-9 w-9 items-center justify-center rounded-xl text-[var(--text-secondary)] transition-all duration-200 hover:bg-black/5 hover:text-[var(--text-primary)] dark:hover:bg-white/5 disabled:cursor-not-allowed"
+            aria-label="Close modal"
           >
-            <X size={18} />
+            <X
+              size={18}
+              className="transition-transform duration-200 group-hover:rotate-90"
+            />
           </button>
-
         </div>
 
         {/* =================================================
@@ -146,11 +178,9 @@ export default function CreateTaskModal({
           onSubmit={handleSubmit}
           className="space-y-5 p-6"
         >
-
           {/* TITLE */}
 
           <div>
-
             <label
               htmlFor="create-task-title"
               className="mb-2 block text-xs font-medium text-[var(--text-secondary)]"
@@ -168,15 +198,13 @@ export default function CreateTaskModal({
               placeholder="e.g. Design dashboard"
               disabled={loading}
               autoFocus
-              className="theme-input w-full rounded-xl border px-4 py-3 text-sm text-[var(--text-primary)] outline-none"
+              className="theme-input w-full rounded-xl border px-4 py-3 text-sm text-[var(--text-primary)] outline-none transition-all duration-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/10"
             />
-
           </div>
 
           {/* DESCRIPTION */}
 
           <div>
-
             <label
               htmlFor="create-task-description"
               className="mb-2 block text-xs font-medium text-[var(--text-primary)]"
@@ -195,19 +223,16 @@ export default function CreateTaskModal({
               placeholder="Describe what needs to be done..."
               disabled={loading}
               rows={4}
-              className="theme-input w-full resize-none rounded-xl border px-4 py-3 text-sm outline-none"
+              className="theme-input w-full resize-none rounded-xl border px-4 py-3 text-sm text-[var(--text-primary)] outline-none transition-all duration-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/10"
             />
-
           </div>
 
           {/* PRIORITY + STATUS */}
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-
             {/* PRIORITY */}
 
             <div>
-
               <label
                 htmlFor="create-task-priority"
                 className="mb-2 block text-xs font-medium text-[var(--text-primary)]"
@@ -227,7 +252,7 @@ export default function CreateTaskModal({
                   )
                 }
                 disabled={loading}
-                className="theme-select w-full px-4 py-3 text-sm text-[var(--text-primary)]"
+                className="theme-select w-full px-4 py-3 text-sm text-[var(--text-primary)] transition-all duration-200 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/10"
               >
                 <option value="low">
                   Low
@@ -241,13 +266,11 @@ export default function CreateTaskModal({
                   High
                 </option>
               </select>
-
             </div>
 
             {/* STATUS */}
 
             <div>
-
               <label
                 htmlFor="create-task-status"
                 className="mb-2 block text-xs font-medium text-[var(--text-primary)]"
@@ -267,7 +290,7 @@ export default function CreateTaskModal({
                   )
                 }
                 disabled={loading}
-                className="theme-select w-full px-4 py-3 text-sm"
+                className="theme-select w-full px-4 py-3 text-sm text-[var(--text-primary)] transition-all duration-200 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/10"
               >
                 <option value="todo">
                   To Do
@@ -281,15 +304,13 @@ export default function CreateTaskModal({
                   Completed
                 </option>
               </select>
-
             </div>
-
           </div>
 
           {/* ERROR */}
 
           {error && (
-            <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-xs text-red-400">
+            <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-xs text-red-500 dark:text-red-400">
               {error}
             </div>
           )}
@@ -297,12 +318,11 @@ export default function CreateTaskModal({
           {/* BUTTONS */}
 
           <div className="flex flex-col-reverse gap-3 border-t border-[var(--border-color)] pt-5 sm:flex-row sm:justify-end">
-
             <button
               type="button"
               onClick={handleClose}
-              disabled={loading}
-              className="rounded-xl border border-[var(--border-color)] px-5 py-3 text-sm text-[var(--text-secondary)] transition hover:bg-black/5 hover:text-[var(--text-primary)] disabled:cursor-not-allowed"
+              disabled={loading || isClosing}
+              className="rounded-xl border border-[var(--border-color)] px-5 py-3 text-sm text-[var(--text-secondary)] transition-all duration-200 hover:bg-black/5 hover:text-[var(--text-primary)] dark:hover:bg-white/5 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
@@ -310,9 +330,8 @@ export default function CreateTaskModal({
             <button
               type="submit"
               disabled={loading || !title.trim()}
-              className="theme-primary-button flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium disabled:cursor-not-allowed disabled:opacity-50"
+              className="theme-primary-button flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-medium transition-all duration-200 hover:scale-[1.01] hover:shadow-lg active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
             >
-
               {loading ? (
                 <>
                   <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
@@ -321,18 +340,17 @@ export default function CreateTaskModal({
                 </>
               ) : (
                 <>
-                  <Plus size={17} />
+                  <Plus
+                    size={17}
+                    className="transition-transform duration-200"
+                  />
 
                   Create task
                 </>
               )}
-
             </button>
-
           </div>
-
         </form>
-
       </div>
     </div>
   );

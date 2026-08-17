@@ -1,14 +1,23 @@
 @import "tailwindcss";
 
+/* =========================================================
+   BASE VARIABLES
+========================================================= */
+
 :root {
   --background: #070a0f;
   --foreground: #f5f7fa;
+
   --surface: #0d121a;
   --surface-hover: #121923;
+
   --border: rgba(255, 255, 255, 0.08);
+
   --muted: #8b95a5;
+
   --primary: #7c5cff;
   --primary-hover: #9175ff;
+
   --success: #27d69b;
   --warning: #ffb84d;
   --danger: #ff5f6d;
@@ -54,6 +63,34 @@ button {
 ::selection {
   background: rgba(124, 92, 255, 0.35);
 }
+
+/* =========================================================
+   AURORA KEYFRAME ANIMATIONS & GLOWS
+========================================================= */
+
+@keyframes aurora-mesh {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes aurora-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+}
+
 /* =========================================================
    TASKFLOW THEMES
 ========================================================= */
@@ -66,102 +103,94 @@ html[data-theme="dark"] {
   --theme-bg: #070a0f;
   --theme-surface: #090d13;
   --theme-card: rgba(255, 255, 255, 0.025);
-
   --theme-border: rgba(255, 255, 255, 0.10);
-
   --theme-text: #ffffff;
   --theme-muted: rgba(255, 255, 255, 0.45);
   --theme-subtle: rgba(255, 255, 255, 0.25);
-
   --theme-input: #0c1118;
-
   --theme-primary: #8b5cf6;
   --theme-primary-hover: #a78bfa;
-
   --theme-menu: #090d13;
 }
 
-
 /* ---------------------------------------------------------
-   LIGHT THEME
+   SOFT LIGHT THEME (ANTI-GLARE AMBIENT WHITE)
 --------------------------------------------------------- */
 
 html[data-theme="light"] {
-  --theme-bg: #ffffff;
-  --theme-surface: #ffffff;
-  --theme-card: #fbfbfb;
-
-  --theme-border: #dfe3eb;
-
-  --theme-text: #000000;
-  --theme-muted: #9c9ea1;
-  --theme-subtle: #070a0e;
-
-  --theme-input: #f7f7f7;
-
-  --theme-primary: #4e44db;
-  --theme-primary-hover: #2c1dd0;
-
-  --theme-menu: #fafafa;
+  --theme-bg: #eaf0f6;
+  --theme-surface: #f4f7fb;
+  --theme-card: #f8fafc;
+  --theme-border: #dbe3ed;
+  --theme-text: #1e293b;
+  --theme-muted: #64748b;
+  --theme-subtle: #94a3b8;
+  --theme-input: #edf2f7;
+  --theme-primary: #4f46e5;
+  --theme-primary-hover: #4338ca;
+  --theme-menu: #f8fafc;
 }
 
-
 /* ---------------------------------------------------------
-   AURORA THEME
+   ENHANCED AURORA THEME
 --------------------------------------------------------- */
 
 html[data-theme="aurora"] {
-  --theme-bg: #030712;
-  --theme-surface: #07111f;
-
-  --theme-card: rgba(10, 25, 42, 0.72);
-
-  --theme-border: rgba(56, 189, 248, 0.18);
-
+  --theme-bg: #020813;
+  --theme-surface: rgba(7, 24, 43, 0.65);
+  --theme-card: rgba(10, 30, 52, 0.55);
+  --theme-border: rgba(34, 211, 238, 0.25);
   --theme-text: #ecfeff;
-  --theme-muted: #8aa9b9;
-  --theme-subtle: #527184;
-
-  --theme-input: #071522;
-
+  --theme-muted: #7dd3fc;
+  --theme-subtle: #38bdf8;
+  --theme-input: rgba(6, 26, 46, 0.75);
   --theme-primary: #06b6d4;
   --theme-primary-hover: #22d3ee;
-
-  --theme-menu: #071522;
+  --theme-menu: #05182a;
 }
-
 
 /* =========================================================
    GLOBAL THEME BACKGROUND
 ========================================================= */
 
+/* LIGHT */
+
 html[data-theme="light"] body {
-  background: #f5f7fb;
-  color: #111827;
+  background: #eaf0f6;
+  color: #1e293b;
 }
+
+/* DARK */
 
 html[data-theme="dark"] body {
   background: #070a0f;
   color: white;
 }
 
+/* AURORA */
+
 html[data-theme="aurora"] body {
   background:
     radial-gradient(
-      circle at 10% 10%,
-      rgba(6, 182, 212, 0.12),
-      transparent 30%
+      circle at 10% 15%,
+      rgba(6, 182, 212, 0.20),
+      transparent 35%
     ),
     radial-gradient(
-      circle at 90% 20%,
-      rgba(139, 92, 246, 0.12),
-      transparent 30%
+      circle at 85% 20%,
+      rgba(139, 92, 246, 0.22),
+      transparent 40%
     ),
-    #030712;
-
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(16, 185, 129, 0.16),
+      transparent 35%
+    ),
+    #020813;
+  background-size: 180% 180%;
+  animation: aurora-mesh 16s ease infinite;
   color: #ecfeff;
 }
-
 
 /* =========================================================
    THEME TOGGLE BUTTON
@@ -176,7 +205,6 @@ html[data-theme="aurora"] body {
 .theme-toggle-button:hover {
   background: var(--theme-border);
 }
-
 
 /* =========================================================
    THEME MENU
@@ -204,7 +232,6 @@ html[data-theme="aurora"] body {
   color: var(--theme-muted);
 }
 
-
 /* =========================================================
    THEMED INPUTS
 ========================================================= */
@@ -224,24 +251,17 @@ html[data-theme="aurora"] body {
   outline: none;
 }
 
-
 /* =========================================================
    THEMED SELECT
 ========================================================= */
 
 .theme-select {
   appearance: none;
-
   background-color: var(--theme-input) !important;
-
   border: 1px solid var(--theme-border) !important;
-
   color: var(--theme-text) !important;
-
   border-radius: 12px;
-
   outline: none;
-
   cursor: pointer;
 }
 
@@ -253,38 +273,25 @@ html[data-theme="aurora"] body {
   border-color: var(--theme-primary) !important;
 }
 
-
-/* Dropdown options */
-
 .theme-select option {
   background-color: var(--theme-input);
   color: var(--theme-text);
 }
 
-
-/* LIGHT SELECT */
-
 html[data-theme="light"] .theme-select option {
-  background: #ffffff;
-  color: #111827;
+  background: #f8fafc;
+  color: #1e293b;
 }
-
-
-/* DARK SELECT */
 
 html[data-theme="dark"] .theme-select option {
   background: #0c1118;
   color: #ffffff;
 }
 
-
-/* AURORA SELECT */
-
 html[data-theme="aurora"] .theme-select option {
-  background: #071522;
+  background: #061a2e;
   color: #ecfeff;
 }
-
 
 /* =========================================================
    PRIMARY BUTTON
@@ -293,9 +300,7 @@ html[data-theme="aurora"] .theme-select option {
 .theme-primary-button {
   background: var(--theme-primary) !important;
   color: #ffffff !important;
-
   border: 1px solid transparent;
-
   transition:
     transform 0.2s ease,
     background 0.2s ease,
@@ -304,31 +309,38 @@ html[data-theme="aurora"] .theme-select option {
 
 .theme-primary-button:hover {
   background: var(--theme-primary-hover) !important;
-
   transform: translateY(-1px);
 }
 
-
-/* LIGHT PRIMARY BUTTON */
-
 html[data-theme="light"] .theme-primary-button {
   color: #ffffff !important;
-
-  box-shadow:
-    0 8px 20px rgba(79, 70, 229, 0.20);
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.25);
 }
-
-
-/* AURORA PRIMARY BUTTON */
 
 html[data-theme="aurora"] .theme-primary-button {
+  background: linear-gradient(
+    135deg,
+    #06b6d4 0%,
+    #10b981 50%,
+    #8b5cf6 100%
+  ) !important;
+  background-size: 200% 200% !important;
+  animation: aurora-mesh 6s ease infinite !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
   box-shadow:
-    0 0 25px rgba(6, 182, 212, 0.20);
+    0 0 20px rgba(6, 182, 212, 0.35),
+    0 0 40px rgba(139, 92, 246, 0.20) !important;
 }
 
+html[data-theme="aurora"] .theme-primary-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 0 30px rgba(6, 182, 212, 0.55),
+    0 0 50px rgba(16, 185, 129, 0.35) !important;
+}
 
 /* =========================================================
-   THEMED CARDS
+   THEMED CARDS & GLASSMORPHISM
 ========================================================= */
 
 .theme-card {
@@ -337,86 +349,58 @@ html[data-theme="aurora"] .theme-primary-button {
   color: var(--theme-text);
 }
 
-
-/* =========================================================
-   LIGHT MODE - MAKE COMMON DARK TAILWIND COLORS READABLE
-========================================================= */
-
-html[data-theme="light"] .bg-\[\#070a0f\] {
-  background: #ffffff !important;
-}
-
-html[data-theme="light"] .bg-\[\#090d13\] {
-  background: #ffffff !important;
-}
-
-html[data-theme="light"] .bg-\[\#0c1118\] {
-  background: #ffffff !important;
-}
-
-html[data-theme="light"] .text-white {
-  color: #111827 !important;
-}
-
-html[data-theme="light"] .text-white\/45 {
-  color: #64748b !important;
-}
-
-html[data-theme="light"] .text-white\/40 {
-  color: #64748b !important;
-}
-
-html[data-theme="light"] .text-white\/35 {
-  color: #64748b !important;
-}
-
-html[data-theme="light"] .text-white\/30 {
-  color: #94a3b8 !important;
-}
-
-html[data-theme="light"] .text-white\/25 {
-  color: #94a3b8 !important;
-}
-
-html[data-theme="light"] .border-white\/10 {
-  border-color: #dfe3eb !important;
-}
-
-html[data-theme="light"] .border-white\/5 {
-  border-color: #edf0f5 !important;
-}
-
-
-/* =========================================================
-   LIGHT MODE - SEARCH
-========================================================= */
-
-html[data-theme="light"] input {
-  color: #111827;
-}
-
-html[data-theme="light"] input::placeholder {
-  color: #94a3b8;
-}
-
-
-/* =========================================================
-   AURORA DIFFERENCE
-========================================================= */
-
 html[data-theme="aurora"] .theme-card {
+  background: rgba(8, 26, 46, 0.55) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(34, 211, 238, 0.22) !important;
   box-shadow:
-    0 0 40px rgba(6, 182, 212, 0.04);
+    0 10px 30px 0 rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(6, 182, 212, 0.10),
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
 }
 
-html[data-theme="aurora"] .theme-primary-button {
+html[data-theme="aurora"] .theme-card:hover {
+  border-color: rgba(34, 211, 238, 0.45) !important;
+  box-shadow:
+    0 12px 40px 0 rgba(0, 0, 0, 0.45),
+    0 0 35px rgba(6, 182, 212, 0.22),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+/* =========================================================
+   AURORA THEME SPECIFICS
+========================================================= */
+
+html[data-theme="aurora"] .dashboard-hero {
   background: linear-gradient(
     135deg,
-    #06b6d4,
-    #8b5cf6
+    rgba(6, 182, 212, 0.16) 0%,
+    rgba(16, 185, 129, 0.12) 50%,
+    rgba(139, 92, 246, 0.16) 100%
   ) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(34, 211, 238, 0.35) !important;
+  box-shadow:
+    0 0 50px rgba(6, 182, 212, 0.20),
+    inset 0 0 30px rgba(16, 185, 129, 0.08) !important;
 }
 
+html[data-theme="aurora"] .theme-toggle-button {
+  border-color: rgba(34, 211, 238, 0.35);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.12);
+}
+
+html[data-theme="aurora"] .theme-menu {
+  background: rgba(5, 24, 42, 0.92) !important;
+  backdrop-filter: blur(16px);
+  border-color: rgba(34, 211, 238, 0.3);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 35px rgba(6, 182, 212, 0.15);
+}
 
 /* =========================================================
    SMOOTH THEME TRANSITION
@@ -442,188 +426,322 @@ section {
   color: var(--theme-text);
   min-height: 100vh;
 }
-html[data-theme="aurora"] .theme-page {
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      rgba(6, 182, 212, 0.12),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 85% 15%,
-      rgba(139, 92, 246, 0.14),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 70% 85%,
-      rgba(16, 185, 129, 0.08),
-      transparent 25%
-    ),
-    #030712;
-}
-
-html[data-theme="aurora"] .theme-primary-button {
-  background:
-    linear-gradient(
-      135deg,
-      #06b6d4 0%,
-      #6366f1 50%,
-      #8b5cf6 100%
-    ) !important;
-
-  box-shadow:
-    0 0 25px rgba(6, 182, 212, 0.20),
-    0 0 50px rgba(139, 92, 246, 0.10);
-}
-
-html[data-theme="aurora"] .theme-toggle-button {
-  border-color: rgba(34, 211, 238, 0.25);
-  box-shadow:
-    0 0 15px rgba(6, 182, 212, 0.05);
-}
-
-html[data-theme="aurora"] .theme-menu {
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.45),
-    0 0 30px rgba(6, 182, 212, 0.06);
-}
-
-@import "tailwindcss";
-
-/* Base variables */
-:root {
-  --background: #070a0f;
-  --foreground: #f5f7fa;
-  --surface: #0d121a;
-  --surface-hover: #121923;
-  --border: rgba(255, 255, 255, 0.08);
-  --muted: #8b95a5;
-  --primary: #7c5cff;
-  --primary-hover: #9175ff;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 /* =========================================================
-   THEMES (Dark, Light, Aurora)
+   LIGHT THEME SOFT-WHITE OVERRIDES
 ========================================================= */
-html[data-theme="dark"] {
-  --theme-bg: #070a0f;
-  --theme-surface: #090d13;
-  --theme-card: rgba(255, 255, 255, 0.025);
-  --theme-border: rgba(255, 255, 255, 0.10);
-  --theme-text: #ffffff;
-  --theme-muted: rgba(255, 255, 255, 0.45);
-  --theme-subtle: rgba(255, 255, 255, 0.25);
-  --theme-input: #0c1118;
-  --theme-primary: #8b5cf6;
-  --theme-primary-hover: #a78bfa;
+
+html[data-theme="light"] .theme-page {
+  background: #eaf0f6 !important;
+  color: #1e293b !important;
 }
 
-html[data-theme="light"] {
-  --theme-bg: #f5f7fb;
-  --theme-surface: #ffffff;
-  --theme-card: #ffffff;
-  --theme-border: #dfe3eb;
-  --theme-text: #111827;
-  --theme-muted: #64748b;
-  --theme-subtle: #94a3b8;
-  --theme-input: #f7f7f7;
-  --theme-primary: #4e44db;
-  --theme-primary-hover: #2c1dd0;
+html[data-theme="light"] header {
+  background: #f4f7fb !important;
+  border-color: #dbe3ed !important;
+  color: #1e293b !important;
 }
 
-html[data-theme="aurora"] {
-  --theme-bg: #030712;
-  --theme-surface: #07111f;
-  --theme-card: rgba(10, 25, 42, 0.72);
-  --theme-border: rgba(56, 189, 248, 0.18);
-  --theme-text: #ecfeff;
-  --theme-muted: #8aa9b9;
-  --theme-subtle: #527184;
-  --theme-input: #071522;
-  --theme-primary: #06b6d4;
-  --theme-primary-hover: #22d3ee;
+html[data-theme="light"] aside {
+  background: #f4f7fb !important;
+  border-color: #dbe3ed !important;
+  color: #1e293b !important;
 }
 
-/* Theme helper classes */
-.theme-page {
-  background: var(--theme-bg);
-  color: var(--theme-text);
-  min-height: 100vh;
+html[data-theme="light"] .bg-white {
+  background-color: #f8fafc !important;
 }
 
-.theme-card {
-  background: var(--theme-card) !important;
-  border-color: var(--theme-border) !important;
-  color: var(--theme-text);
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
+  background-color: #edf2f7;
+  color: #1e293b;
+  border-color: #cbd5e1;
 }
 
-.theme-input {
-  background: var(--theme-input) !important;
-  border-color: var(--theme-border) !important;
-  color: var(--theme-text) !important;
+html[data-theme="light"] .bg-slate-100 {
+  background-color: #e2e8f0 !important;
 }
 
-.theme-primary-button {
-  background: var(--theme-primary) !important;
-  color: #ffffff !important;
+html[data-theme="light"] .bg-slate-50 {
+  background-color: #edf2f7 !important;
 }
 
+html[data-theme="light"] .hover\:bg-slate-50:hover {
+  background-color: #edf2f7 !important;
+}
+
+html[data-theme="light"] .hover\:bg-slate-100:hover {
+  background-color: #e2e8f0 !important;
+}
+
+html[data-theme="light"] .text-slate-900 {
+  color: #0f172a !important;
+}
+
+html[data-theme="light"] .text-slate-800 {
+  color: #1e293b !important;
+}
+
+html[data-theme="light"] .text-slate-700 {
+  color: #334155 !important;
+}
+
+html[data-theme="light"] .text-slate-600 {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .text-slate-500 {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .border-slate-200 {
+  border-color: #cbd5e1 !important;
+}
+
+html[data-theme="light"] .border-slate-100 {
+  border-color: #e2e8f0 !important;
+}
+
+html[data-theme="light"] .theme-card {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+html[data-theme="light"] .theme-menu {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme="light"] .theme-toggle-button {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #1e293b !important;
+}
+
+html[data-theme="light"] .dashboard-hero {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 50%, #e0f2fe 100%) !important;
+  border-color: #c7d2fe !important;
+  color: #1e293b !important;
+}
 /* =========================================================
-   KEYFRAME ANIMATIONS & FUTURISTIC EFFECTS
+   STEP 10.1 — PROFESSIONAL UI ANIMATIONS
 ========================================================= */
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.35; filter: blur(20px); }
-  50% { opacity: 0.75; filter: blur(32px); }
+
+/* ---------------------------------------------------------
+   PAGE ENTRANCE
+--------------------------------------------------------- */
+
+@keyframes taskflow-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+
+/* ---------------------------------------------------------
+   SOFT FADE
+--------------------------------------------------------- */
+
+@keyframes taskflow-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
+
+/* ---------------------------------------------------------
+   SUBTLE SCALE
+--------------------------------------------------------- */
+
+@keyframes taskflow-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.animate-glow-pulse {
-  animation: glowPulse 4s ease-in-out infinite;
+
+/* ---------------------------------------------------------
+   REUSABLE ANIMATION CLASSES
+--------------------------------------------------------- */
+
+.taskflow-animate {
+  animation:
+    taskflow-fade-up
+    0.45s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+
+.taskflow-fade {
+  animation:
+    taskflow-fade
+    0.35s
+    ease-out
+    both;
 }
 
-.shimmer-overlay {
-  position: relative;
-  overflow: hidden;
+
+.taskflow-scale {
+  animation:
+    taskflow-scale-in
+    0.35s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
 }
 
-.shimmer-overlay::after {
-  position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  transform: translateX(-100%);
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0,
-    rgba(255, 255, 255, 0.04) 20%,
-    rgba(255, 255, 255, 0.12) 60%,
-    rgba(255, 255, 255, 0)
-  );
-  animation: shimmer 3s infinite;
-  content: '';
+
+/* ---------------------------------------------------------
+   STAGGERED ENTRANCE
+--------------------------------------------------------- */
+
+.taskflow-delay-1 {
+  animation-delay: 60ms;
+}
+
+.taskflow-delay-2 {
+  animation-delay: 120ms;
+}
+
+.taskflow-delay-3 {
+  animation-delay: 180ms;
+}
+
+.taskflow-delay-4 {
+  animation-delay: 240ms;
+}
+
+.taskflow-delay-5 {
+  animation-delay: 300ms;
+}
+
+
+/* ---------------------------------------------------------
+   CARD HOVER
+--------------------------------------------------------- */
+
+.taskflow-card-hover {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.taskflow-card-hover:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 30px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   DARK CARD HOVER
+--------------------------------------------------------- */
+
+html[data-theme="dark"] .taskflow-card-hover:hover {
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.28);
+}
+
+
+/* ---------------------------------------------------------
+   AURORA CARD HOVER
+--------------------------------------------------------- */
+
+html[data-theme="aurora"] .taskflow-card-hover:hover {
+  box-shadow:
+    0 12px 35px rgba(6, 182, 212, 0.10),
+    0 0 25px rgba(139, 92, 246, 0.06);
+}
+
+
+/* ---------------------------------------------------------
+   TASK ROW HOVER
+--------------------------------------------------------- */
+
+.taskflow-task-hover {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.taskflow-task-hover:hover {
+  transform: translateX(3px);
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON MICRO INTERACTION
+--------------------------------------------------------- */
+
+.taskflow-button {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.taskflow-button:hover {
+  transform: translateY(-1px);
+}
+
+.taskflow-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+
+/* ---------------------------------------------------------
+   HERO SOFT EFFECT
+--------------------------------------------------------- */
+
+.taskflow-hero {
+  animation:
+    taskflow-scale-in
+    0.55s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+/* ---------------------------------------------------------
+   REDUCE MOTION
+--------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .taskflow-animate,
+  .taskflow-fade,
+  .taskflow-scale,
+  .taskflow-hero {
+    animation: none !important;
+  }
+
+  .taskflow-card-hover,
+  .taskflow-task-hover,
+  .taskflow-button {
+    transition: none !important;
+  }
 }

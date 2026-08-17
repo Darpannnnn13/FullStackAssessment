@@ -223,7 +223,7 @@ export default function Home() {
 
   return (
     <GuestGuard>
-            <main className="theme-page relative min-h-screen bg-white dark:bg-[#04070d] text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
+      <main className="theme-page relative min-h-screen bg-white dark:bg-[#04070d] text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
         {/* Holographic Background Grid Glow */}
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#1f293708_1px,transparent_1px),linear-gradient(to_bottom,#1f293708_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1f293712_1px,transparent_1px),linear-gradient(to_bottom,#1f293712_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
@@ -310,28 +310,6 @@ export default function Home() {
               </div>
 
               <div className="flex items-center gap-3">
-                {/* Search Input */}
-                <div className="relative hidden md:block">
-                  <Search
-                    size={16}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-                  />
-                  <input
-                    value={searchQuery}
-                    onChange={(event) => setSearchQuery(event.target.value)}
-                    placeholder="Search tasks..."
-                    className="h-10 w-64 rounded-xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-cyan-950/10 pl-9 pr-9 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 backdrop-blur-sm shadow-sm dark:shadow-none transition-all focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setSearchQuery('')}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-white"
-                    >
-                      <X size={14} />
-                    </button>
-                  )}
-                </div>
 
                 <ThemeToggle />
 
@@ -339,7 +317,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => setIsCreateModalOpen(true)}
-                  className="relative group overflow-hidden flex h-10 items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-500 dark:to-blue-600 px-4 text-xs font-semibold text-white shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] hover:scale-[1.02]"
+                  className="theme-primary-button relative group overflow-hidden flex h-10 items-center gap-2 rounded-xl px-4 text-xs font-semibold text-white transition-all hover:scale-[1.02]"
                 >
                   <Plus size={16} />
                   <span>Create task</span>
@@ -350,9 +328,9 @@ export default function Home() {
             {/* CONTENT */}
             <div className="mx-auto max-w-7xl space-y-8 p-5 md:p-8">
               {/* HERO HUD BANNER */}
-              <section className="relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-cyan-100/70 via-white to-violet-100/70 dark:from-cyan-950/30 dark:via-slate-900/40 dark:to-violet-950/30 p-6 md:p-8 backdrop-blur-md shadow-lg dark:shadow-[0_0_40px_rgba(6,182,212,0.1)]">
-                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cyan-400/20 dark:bg-cyan-500/10 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-20 right-20 h-72 w-72 rounded-full bg-violet-400/20 dark:bg-violet-500/10 blur-3xl" />
+              <section className="taskflow-hero dashboard-hero relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-cyan-100/70 via-white to-violet-100/70 dark:from-cyan-950/30 dark:via-slate-900/40 dark:to-violet-950/30 p-6 md:p-8 backdrop-blur-md shadow-lg dark:shadow-[0_0_40px_rgba(6,182,212,0.1)]">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cyan-400/20 dark:bg-cyan-500/10 blur-3xl animate-[aurora-pulse_8s_ease-in-out_infinite]" />
+                <div className="pointer-events-none absolute -bottom-20 right-20 h-72 w-72 rounded-full bg-violet-400/20 dark:bg-violet-500/10 blur-3xl animate-[aurora-pulse_10s_ease-in-out_infinite]" />
 
                 <div className="relative z-10 max-w-2xl">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-600/40 bg-cyan-500/15 dark:border-cyan-400/30 dark:bg-cyan-500/10 px-3.5 py-1 text-xs font-bold text-cyan-900 dark:text-cyan-300 shadow-sm">
@@ -362,7 +340,7 @@ export default function Home() {
                   <h1 className="text-3xl font-bold tracking-tight md:text-5xl text-slate-900 dark:text-white leading-tight">
                     Build momentum.
                     <br />
-                    <span className="bg-gradient-to-r from-cyan-600 via-blue-600 to-violet-600 dark:from-cyan-400 dark:to-violet-400 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-cyan-600 via-emerald-500 to-violet-600 dark:from-cyan-400 dark:via-emerald-300 dark:to-violet-400 bg-clip-text text-transparent">
                       One task at a time.
                     </span>
                   </h1>
@@ -380,85 +358,85 @@ export default function Home() {
                 </div>
               </section>
 
-{/* =========================================================
-    STATISTICS CARDS (Theme-Adaptive styling)
-   ========================================================= */}
-<section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-  {/* TOTAL TASKS */}
-  <div className="group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-violet-500 hover:shadow-md">
-    <div className="flex items-center justify-between">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-violet-300 dark:border-violet-500/30 bg-violet-100 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300">
-        <Terminal size={19} />
-      </div>
-      <span className="text-xs font-bold tracking-wider uppercase text-violet-800 dark:text-violet-300">
-        Total
-      </span>
-    </div>
-    <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
-      {totalTasks}
-    </p>
-    <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
-      Total tasks
-    </p>
-  </div>
+              {/* =========================================================
+                  STATISTICS CARDS (Theme-Adaptive styling)
+                 ========================================================= */}
+              <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {/* TOTAL TASKS */}
+                <div className="taskflow-card-hover taskflow-animate taskflow-delay-1 theme-card group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-violet-500 hover:shadow-md">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-violet-300 dark:border-violet-500/30 bg-violet-100 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300">
+                      <Terminal size={19} />
+                    </div>
+                    <span className="text-xs font-bold tracking-wider uppercase text-violet-800 dark:text-violet-300">
+                      Total
+                    </span>
+                  </div>
+                  <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
+                    {totalTasks}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
+                    Total tasks
+                  </p>
+                </div>
 
-  {/* COMPLETED TASKS */}
-  <div className="group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-emerald-500 hover:shadow-md">
-    <div className="flex items-center justify-between">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-300 dark:border-emerald-500/30 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
-        <CheckCircle2 size={19} />
-      </div>
-      <span className="text-xs font-bold tracking-wider uppercase text-emerald-800 dark:text-emerald-300">
-        Done
-      </span>
-    </div>
-    <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
-      {completedTasks}
-    </p>
-    <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
-      Completed tasks
-    </p>
-  </div>
+                {/* COMPLETED TASKS */}
+                <div className="taskflow-card-hover taskflow-animate taskflow-delay-2 theme-card group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-emerald-500 hover:shadow-md">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-300 dark:border-emerald-500/30 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                      <CheckCircle2 size={19} />
+                    </div>
+                    <span className="text-xs font-bold tracking-wider uppercase text-emerald-800 dark:text-emerald-300">
+                      Done
+                    </span>
+                  </div>
+                  <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
+                    {completedTasks}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
+                    Completed tasks
+                  </p>
+                </div>
 
-  {/* IN PROGRESS TASKS */}
-  <div className="group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-cyan-500 hover:shadow-md">
-    <div className="flex items-center justify-between">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300 dark:border-cyan-500/30 bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300">
-        <Clock3 size={19} />
-      </div>
-      <span className="text-xs font-bold tracking-wider uppercase text-cyan-800 dark:text-cyan-300">
-        In Progress
-      </span>
-    </div>
-    <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
-      {inProgressTasks}
-    </p>
-    <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
-      In progress
-    </p>
-  </div>
+                {/* IN PROGRESS TASKS */}
+                <div className="taskflow-card-hover taskflow-animate taskflow-delay-3 theme-card group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-cyan-500 hover:shadow-md">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-300 dark:border-cyan-500/30 bg-cyan-100 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300">
+                      <Clock3 size={19} />
+                    </div>
+                    <span className="text-xs font-bold tracking-wider uppercase text-cyan-800 dark:text-cyan-300">
+                      In Progress
+                    </span>
+                  </div>
+                  <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
+                    {inProgressTasks}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
+                    In progress
+                  </p>
+                </div>
 
-  {/* TO DO TASKS */}
-  <div className="group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-amber-500 hover:shadow-md">
-    <div className="flex items-center justify-between">
-      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-amber-300 dark:border-amber-500/30 bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
-        <Circle size={19} />
-      </div>
-      <span className="text-xs font-bold tracking-wider uppercase text-amber-800 dark:text-amber-300">
-        To Do
-      </span>
-    </div>
-    <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
-      {todoTasks}
-    </p>
-    <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
-      To do
-    </p>
-  </div>
-</section>
+                {/* TO DO TASKS */}
+                <div className="taskflow-card-hover taskflow-animate taskflow-delay-4 theme-card group rounded-2xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-900/60 p-5 shadow-sm transition-all hover:border-amber-500 hover:shadow-md">
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-amber-300 dark:border-amber-500/30 bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                      <Circle size={19} />
+                    </div>
+                    <span className="text-xs font-bold tracking-wider uppercase text-amber-800 dark:text-amber-300">
+                      To Do
+                    </span>
+                  </div>
+                  <p className="mt-5 text-4xl font-black text-slate-900 dark:text-white">
+                    {todoTasks}
+                  </p>
+                  <p className="mt-1 text-xs font-bold text-slate-600 dark:text-slate-400">
+                    To do
+                  </p>
+                </div>
+              </section>
 
               {/* TASKS LIST SECTION */}
-              <section className="overflow-hidden rounded-3xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-950/60 backdrop-blur-xl shadow-sm dark:shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+              <section className="taskflow-animate taskflow-delay-5 theme-card overflow-hidden rounded-3xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-slate-950/60 backdrop-blur-xl shadow-sm dark:shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                 {/* Header & Controls */}
                 <div className="border-b border-slate-200 dark:border-cyan-500/10 p-5 md:p-6">
                   <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -474,7 +452,28 @@ export default function Home() {
                         Manage and track your workspace
                       </p>
                     </div>
-
+                    {/* Search Input */}
+                <div className="relative hidden md:block">
+                  <Search
+                    size={16}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                  />
+                  <input
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    placeholder="Search tasks..."
+                    className="theme-input h-10 w-64 rounded-xl border border-slate-200 dark:border-cyan-500/20 bg-white dark:bg-cyan-950/10 pl-9 pr-9 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 backdrop-blur-sm shadow-sm dark:shadow-none transition-all focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-white"
+                    >
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
                     {/* Mobile Search */}
                     <div className="relative md:hidden">
                       <Search
@@ -485,7 +484,7 @@ export default function Home() {
                         value={searchQuery}
                         onChange={(event) => setSearchQuery(event.target.value)}
                         placeholder="Search tasks..."
-                        className="h-10 w-full rounded-xl border border-slate-200 dark:border-cyan-500/20 bg-slate-100 dark:bg-cyan-950/10 pl-9 pr-9 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
+                        className="theme-input h-10 w-full rounded-xl border border-slate-200 dark:border-cyan-500/20 bg-slate-100 dark:bg-cyan-950/10 pl-9 pr-9 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500"
                       />
                       {searchQuery && (
                         <button
@@ -563,12 +562,12 @@ export default function Home() {
                             event.target.value as PriorityFilter,
                           )
                         }
-                        className="rounded-xl border border-slate-200 dark:border-cyan-500/20 bg-slate-100 dark:bg-cyan-950/20 px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 focus:border-cyan-500 focus:outline-none"
+                        className="theme-select rounded-xl border border-slate-200 dark:border-cyan-500/20 bg-slate-100 dark:bg-cyan-950/20 px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 focus:border-cyan-500 focus:outline-none"
                       >
-                        <option value="all" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200">All Priorities</option>
-                        <option value="low" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200">Low Priority</option>
-                        <option value="medium" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200">Medium Priority</option>
-                        <option value="high" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200">High Priority</option>
+                        <option value="all">All Priorities</option>
+                        <option value="low">Low Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="high">High Priority</option>
                       </select>
                     </div>
 
@@ -626,7 +625,7 @@ export default function Home() {
                       <button
                         type="button"
                         onClick={() => setIsCreateModalOpen(true)}
-                        className="mt-5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 px-4 py-2.5 text-xs font-semibold text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/20"
+                        className="theme-primary-button mt-5 rounded-xl border border-cyan-500/30 px-4 py-2.5 text-xs font-semibold text-cyan-700 dark:text-cyan-300 hover:bg-cyan-500/20"
                       >
                         Create task
                       </button>
@@ -664,7 +663,7 @@ export default function Home() {
                       {filteredTasks.map((task) => (
                         <div
                           key={task._id}
-                          className="group flex flex-col gap-4 p-5 transition-all hover:bg-slate-50 dark:hover:bg-cyan-950/20 md:flex-row md:items-center md:justify-between"
+                          className="taskflow-task-hover group flex flex-col gap-4 p-5 transition-all hover:bg-slate-50 dark:hover:bg-cyan-950/20 md:flex-row md:items-center md:justify-between"
                         >
                           <div className="flex min-w-0 items-start gap-4">
                             <div className="mt-1 shrink-0">
