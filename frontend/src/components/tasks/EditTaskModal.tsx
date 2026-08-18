@@ -77,7 +77,9 @@ export default function EditTaskModal({
       return;
     }
 
-    try {
+try {
+      if (!task) return; // Guard clause to ensure task exists
+
       setLoading(true);
       setError('');
 
