@@ -1,121 +1,62 @@
-# TaskFlow — Task Management System
+# TaskFlow Frontend
 
-A modern full-stack task management application built with Next.js, NestJS, MongoDB, and TypeScript.
+The frontend of TaskFlow is a responsive task management dashboard built using Next.js, React, TypeScript and Tailwind CSS.
 
-TaskFlow provides a clean and responsive workspace for creating, managing, searching, filtering, editing, and deleting tasks.
+## Tech Stack
 
----
-
-## 🚀 Features
-
-### Task Management
-
-- Create tasks
-- Edit tasks
-- Delete tasks
-- View tasks
-- Task status management
-- Task priority management
-
-### Status
-
-Tasks can have one of the following statuses:
-
-- To Do
-- In Progress
-- Completed
-
-### Priority
-
-Tasks support:
-
-- Low
-- Medium
-- High
-
-### Search & Filtering
-
-- Search tasks by title
-- Search tasks by description
-- Filter by status
-- Filter by priority
-- Clear all filters
-
-### Dashboard
-
-The dashboard provides:
-
-- Total task count
-- Completed task count
-- In-progress task count
-- To-do task count
-- Recent task listing
-
-### UI / UX
-
-- Responsive design
-- Mobile sidebar navigation
-- Light theme
-- Dark theme
-- Aurora/futuristic visual design
-- Animated task cards
-- Modal animations
-- Responsive task creation/editing
-- Loading states
-- Error states
-- Empty states
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- Next.js
+- Next.js 16
 - React
 - TypeScript
 - Tailwind CSS
 - Lucide React
+- Next.js App Router
 
-### Backend
+## Features
 
-- NestJS
-- TypeScript
-- REST API
+- Task dashboard
+- Create task
+- Edit task
+- Delete task
+- Task search
+- Status filtering
+- Priority filtering
+- Guest login
+- Light theme
+- Dark theme
+- Aurora theme
+- Persistent theme selection
+- Responsive desktop/tablet/mobile layout
+- Modal animations
+- Hover and focus interactions
 
-### Database
-
-- MongoDB
-- Mongoose
-
-### Development Tools
-
-- VS Code
-- Git
-- GitHub
-- npm
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```text
-FullStackAssessment/
+frontend/
+├── app/
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
 │
-├── frontend/
-│   ├── app/
+├── src/
 │   ├── components/
 │   │   ├── auth/
-│   │   └── tasks/
-│   ├── lib/
-│   ├── types/
-│   ├── public/
-│   └── package.json
-│
-├── backend/
-│   ├── src/
 │   │   ├── tasks/
-│   │   └── ...
-│   └── package.json
+│   │   │   ├── CreateTaskModal.tsx
+│   │   │   └── EditTaskModal.tsx
+│   │   ├── ui/
+│   │   └── ThemeToggle.tsx
+│   │
+│   ├── lib/
+│   │   └── api.ts
+│   │
+│   └── types/
+│       ├── route.ts
+│       └── task.ts
 │
-└── README.md
+├── public/
+├── .env.local
+├── package.json
+├── next.config.ts
+├── postcss.config.mjs
+└── tsconfig.json
