@@ -6,13 +6,13 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'https://YOUR-VERCEL-DOMAIN.vercel.app',
-    ],
-    credentials: true,
-  });
+app.enableCors({
+  origin: [
+    'http://localhost:3000',
+    'https://full-stack-assessment-qm2u.vercel.app',
+  ],
+  credentials: true,
+});
 
   app.useGlobalPipes(
     new ValidationPipe({
